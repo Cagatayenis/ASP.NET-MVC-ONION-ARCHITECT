@@ -1,0 +1,131 @@
+﻿@{
+    
+
+    ViewBag.Title = "detailpage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container margin_60_35">
+    <div class="row">
+        <div class="col-md-3">
+            <p>@Html.ActionLink("Restorant Listesi", "RestaurantList", "Home", null, new { @class = "btn_side" })
+        </div><!-- End col-md-3 -->
+
+        <div class="col-md-6">
+            <div class="box_style_2" id="main_menu">
+                <h2 class="inner">Menu</h2>
+                <table class="table table-striped cart-list">
+                    <thead>
+                        <tr>
+                            <th>
+                                Yemek
+                            </th>
+                            <th>
+                                Fiyat
+                            </th>
+                            <th>
+                                Siparis
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Meal item in ViewBag.menu)
+                        {
+                            <tr>
+                                <td>
+                                    <figure class="thumb_menu_list"><img src="~/Content/img/menu-thumb-1.jpg" alt="thumb"></figure>
+                                    <h5>@item.Name</h5>
+                                    <p>
+                                        @item.Description
+                                    </p>
+                                </td>
+                                <td>
+                                    <strong>@item.Price</strong>
+                                </td>
+                                <td class="options">
+                                    <div class="dropdown dropdown-options">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon_plus_alt2"></i></a>
+                                        <div class="dropdown-menu">
+                                            @*<a href="#0" class="add_to_basket">Add to cart</a>*@
+                                            @*@Html.ActionLink("Sepete Ekle", "AddtoCart", "ShoppingCart", new { id = item.ID }, new { @class = "add_to_basket" })*@
+                                            @*@Html.ActionLink("Sepetime Ekle", null,null,new { @name = item.ID, @class = "add_to_basket" })*@
+                                            <a name="@item.ID" class="add_to_basket">Sepete Ekle</a>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <hr>
+
+            </div><!-- End box_style_1 -->
+        </div><!-- End col-md-6 -->
+        <!-- sepet baslangici -->
+        <div class="col-md-3" id="sidebar">
+            <div class="theiaStickySidebar">
+                @Html.Partial("/Views/ShoppingCart/_SepetYeri.cshtml"); <!-- End cart_box -->
+            </div><!-- End theiaStickySidebar -->
+        </div>
+
+        <!-- End col-md-3 -->
+
+    </div><!-- End row -->
+</div>
+<div class="search-overlay-menu">
+    <span class="search-overlay-close"><i class="icon_close"></i></span>
+    <form role="search" id="searchform" method="get">
+        <input value="" name="q" type="search" placeholder="Search..." />
+        <button type="submit">
+            <i class="icon-search-6"></i>
+        </button>
+    </form>
+</div>
+
+
+@section scripts{
+    <script>
+        jQuery('#sidebar').theiaStickySidebar({
+            additionalMarginTop: 80
+        });</script>
+    <script>
+        $('#cat_nav a[href^="#"]').on('click', function (e) {
+            e.preventDefault();
+            var target = this.hash;
+            var $target = $(target);
+            $('html, body').stop().animate({
+                'scrollTop': $target.offset().top - 70
+            }, 900, 'swing', function () {
+                window.location.hash = target;
+            });
+        });
+    </script>
+
+    <script>
+        $(".add_to_basket").click(function myfunction() {
+
+            var yid = $(this).attr("name");
+            $.ajax({
+
+                type: "Get",
+                url: "/ShoppingCart/AddtoCart",
+                data: { id: yid, islem: 'arti' },
+                success: function myfunction(veri) {
+                    $.ajax({
+                        type: "Get",
+                        url: "/ShoppingCart/_SepetYeri",
+                        success: function verigetir(veri) {
+
+                            $("#cart_box").html();
+                            $("#cart_box").html(veri);
+
+                        }
+                    })
+
+                }
+            })
+        })
+    </script>
+
+
+}

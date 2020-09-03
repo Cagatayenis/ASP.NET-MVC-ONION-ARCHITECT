@@ -1,0 +1,17 @@
+﻿@model Province
+@{
+    ViewBag.Title = "İl Ekleme";
+}
+
+<h2>Insert</h2>
+
+@using (Html.BeginForm("Insert", "Province", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="categoryName">İl Adı:</label>
+        @Html.TextBoxFor(m => m.ProvinceName, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-default">Kaydet</button>
+}
+
+

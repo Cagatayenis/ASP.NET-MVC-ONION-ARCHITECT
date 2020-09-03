@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="subheader">
+    <div id="sub_content">
+        <h1>Yemek Siparisi Ver</h1>
+       @using (Html.BeginForm("RestaurantList","Home", new { id = "d9831cfd-b884-e911-bb1e-c01885b6ba6b" }, FormMethod.Post,new {@id ="Myform"}))
+       {
+            <div class="styled-select">
+                @Html.DropDownList("ProvinceID", null, "İL SEÇİNİNİZ...", htmlAttributes: new { @class = "form-control", @id = "Sehirler" })
+            </div>
+            <br />
+            <div class="styled-select">
+                @Html.DropDownList("CountryID", null, htmlAttributes: new { @class = "form-control", @id = "ilceler" })
+            </div>
+            <br />
+            <div class="styled-select">
+                @Html.DropDownList("DistrictID", null, htmlAttributes: new { @class = "form-control", @id = "semtler" })
+            </div>
+            <div id="custom-search-input">
+                <div class="input-group ">
+                    <input type="text" class="search-query" placeholder="Restorant Ara">
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn_search" value="submit" id="yolla">
+                    </span>
+                </div>
+            </div>
+       }
+    </div><!-- End sub_content -->
+</div><!-- End subheader -->
+
+<br /><br />
+
+
+
+@section scripts{
+<script>
+    
+    $("#Sehirler").change(function myfunction() {
+            var secim = $(this).val();
+            var ilceler = $('#ilceler')
+            $('#ilceler').empty();
+            $('#semtler').empty();
+            $.ajax({
+                url: "/Home/ilcebilgisi",
+                type: "Get",
+                dataType:'json',
+                data: { id: secim,},
+                success: function myfunction(data) {
+                    $.each(data, function (index, options) {
+                        ilceler.append('<option value=' + options.Value + '>' + options.Text + '</option>');
+                    })  
+                }
+            })
+    })
+
+    $("#ilceler").change(function myfunction() {
+        var secim = $(this).val();
+        var semtler = $('#semtler')
+        $('#semtler').empty();
+        $.ajax({
+            url: "/Home/Semtbilgisi",
+            type: "Get",
+            dataType: 'json',
+            data: { id: secim, },
+            success: function myfunction(data) {
+                $.each(data, function (index, options) {
+                    semtler.append('<option value=' + options.Value + '>' + options.Text + '</option>');
+                })
+            }
+        })
+    })    
+
+</script>
+<script>
+    $("#ilceler").change(function myfunction() {
+        
+        var secim = $(this).val();
+        var deger = "/Home/RestaurantList/"+secim;
+        //document.getElementById("Myform").getAttribute("action")
+        document.getElementById("Myform").setAttribute("action",deger);
+        //alert(deger);
+
+    })
+    </script>
+
+    }

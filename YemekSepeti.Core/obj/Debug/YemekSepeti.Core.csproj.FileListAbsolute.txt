@@ -1,0 +1,12 @@
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\bin\Debug\YemekSepeti.Core.dll.config
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\bin\Debug\YemekSepeti.Core.dll
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\bin\Debug\YemekSepeti.Core.pdb
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\bin\Debug\EntityFramework.dll
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\bin\Debug\EntityFramework.xml
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\obj\Debug\YemekSepeti.Core.csproj.CoreCompileInputs.cache
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\obj\Debug\YemekSepeti.Core.csproj.CopyComplete
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\obj\Debug\YemekSepeti.Core.dll
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\obj\Debug\YemekSepeti.Core.pdb
+C:\Users\Cagatay\Desktop\Projem\YemekSepeti_Uygulamasi\YemekSepeti.Core\obj\Debug\YemekSepeti.Core.csprojAssemblyReference.cache

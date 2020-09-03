@@ -1,0 +1,124 @@
+﻿@model Order
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal kdv = 1.18m;
+}
+
+@using (Html.BeginForm("Insert", "Order", FormMethod.Get))
+{
+    <div class="container margin_60_35">
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="box_style_2 hidden-xs info">
+                    <h4 class="nomargin_top">Siparis Süresi <i class="icon_clock_alt pull-right"></i></h4>
+                    <p>
+                        <h2><strong>Servis Süresi Ortalama 30 Dakikadir.</strong></h2>  
+                    </p>
+                    <hr>
+                </div><!-- End box_style_1 -->
+            </div><!-- End col-md-3 -->
+
+            <div class="col-md-6">
+                <div class="box_style_2" id="order_process">
+                    <h2 class="inner">Your order details</h2>
+                    @if (Session["LoginUser"] != null)
+                    {
+                        AppUser gelen = (AppUser)Session["LoginUser"];
+                        <div class="form-group">
+                            <label>First name</label>
+                            <input type="text" class="form-control" id="firstname_order" name="firstname_order" placeholder="@gelen.Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Last name</label>
+                            <input type="text" class="form-control" id="lastname_order" name="lastname_order" placeholder="@gelen.SurName">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Telephone/mobile</label>
+                            <input type="text" id="tel_order" name="tel_order" class="form-control" placeholder="@gelen.Phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <br />
+                            <input type="email" id="email_booking_2" name="email_order" class="form-control" placeholder="@gelen.EmailAddress">
+
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label>Your full address</label>
+                        @Html.TextAreaFor(m => m.CustomerAddress, new { @class = "form form-control" })
+                    </div>
+                    
+                </div><!-- End box_style_1 -->
+            </div><!-- End col-md-6 -->
+
+            <div class="col-md-3" id="sidebar">
+                <div class="theiaStickySidebar">
+                    <div id="cart_box">
+                        <h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
+                        <table class="table table_summary">
+                            <tbody>
+                                @foreach (Sepet item in (List<Sepet>)Session["sepetim"])
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>@item.Quantity x</strong> @item.Name
+                                        </td>
+                                        <td>
+                                            <strong class="pull-right">@item.Price TL </strong>
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        <table class="table table_summary">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Ara Toplam <span class="pull-right">
+                                            @if (Session["sepetim"] != null)
+                                            {
+                                                List<Sepet>
+                                                spt = (List<Sepet>)Session["sepetim"];
+                                                @spt.Sum(x => x.Price)
+                                            }TL
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="total">
+                                        Toplam Ucret <span class="pull-right">
+                                            @if (Session["sepetim"] != null)
+                                            {
+                                                List<Sepet>
+                                                spt = (List<Sepet>)Session["sepetim"];
+                                                @spt.Sum(x => x.Price*kdv)
+                                            }TL
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        @*<a class="btn-submit" href="@Url.Action("Insert","Order")">Go to checkout</a>*@
+
+                        <button type="submit" class="btn btn-success">Sipariş Ver</button>
+
+                    </div><!-- End cart_box -->
+                </div><!-- End theiaStickySidebar -->
+            </div><!-- End col-md-3 -->
+
+        </div><!-- End row -->
+    </div>
+}
+
+
+

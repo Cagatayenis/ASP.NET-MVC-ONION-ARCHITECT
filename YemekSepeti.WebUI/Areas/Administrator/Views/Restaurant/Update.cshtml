@@ -1,0 +1,46 @@
+﻿@model Restaurant
+@{
+                /**/
+
+                ViewBag.Title = "Restorant Guncelle";
+}
+
+@using (Html.BeginForm("Update","Restaurant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label for="RestorantAdi">Restorant Adı:</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="Working_Hour">Aciliş Saati:</label>
+        <input type="time" class="form-control" name="Working_Hour" />
+    </div>
+    <div class="form-group">
+        <label for="End_Hour">Kapaniş Saati:</label>
+        <input type="time" class="form-control" name="End_Time" />
+    </div>
+    <div class="form-group">
+        <label for="Service_Time">Servis Süresi:</label>
+        @Html.TextBoxFor(m => m.Service_Time, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="image">Resim:</label>
+        <input type="file" name="fluResim" />
+    </div>
+    <div class="form-group">
+        <label for="Paket_Ucreti">Minimum Paket Tutari:</label>
+        @Html.TextBoxFor(m => m.Packagefee, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="PromosyonBilgisi">Promosyon Bilgisi:</label>
+        @Html.TextAreaFor(m => m.Promotionalinformation, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="Puan">Uyarılar & Bilgiler:</label>
+        @Html.TextAreaFor(m => m.WarningandInformation, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-default">Kaydet</button>
+}
+

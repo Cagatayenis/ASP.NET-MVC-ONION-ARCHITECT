@@ -1,0 +1,97 @@
+﻿@model  List<Sepet>
+<div id="cart_box">
+    <h3>
+        Sepetiniz <i class="icon_cart_alt pull-right"></i>
+    </h3>
+    @if (Model == null)
+    {
+        <span>Sepetiniz henüz boş.</span>
+    }
+    else if (Session["sepetim"] != null)
+    {
+        <table class="table table_summary">
+            <tbody>
+                @foreach (Sepet item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a class="btn-danger" name="@item.MealID">Sil</a>
+                            <strong>@item.Quantity x</strong> @item.Name
+                        </td>
+                        <td>
+                            <strong class="pull-right">@item.Price</strong>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+        //}
+        <hr>
+        <table class="table table_summary">
+            <tbody>
+                <tr>
+                    <td>
+
+                        AraToplam <span class="pull-right">
+                            @if (Session["sepetim"] != null)
+                            {
+                                List<Sepet> spt = (List<Sepet>)Session["sepetim"];
+                                @spt.Sum(x => x.Price)
+                            }TL
+                        </span>
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="total">
+                        Toplam Tutar <span class="pull-right">
+                            @if (Session["sepetim"] != null)
+                            {
+                                decimal kdv = 1.18m;
+                                List<Sepet>
+                                            spt = (List<Sepet>)Session["sepetim"];
+                                @spt.Sum(x => x.Price * kdv)
+                            }TL
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+        <hr>  
+    @if(Session["LoginUser"]==null)
+    {
+        <div class="ls-bottom-slidebuttons"><font color="red">Sepete Eklenen Ürünleri Üye Girişi Yapmadan Satin Alamazsiniz.</font></div>
+    }
+    else
+    { <a class="btn_full" href="@Url.Action("Index","Order")">Siparis Ver</a> }
+    
+</div>
+
+
+<script>
+    $('.btn-danger').click(function myfunction() {
+        var mid = $(this).attr('name');
+        $.ajax({
+            type: "Get",
+            url: "/ShoppingCart/AddtoCart",
+            data: { id: mid, islem: 'eksi' },
+            success: function myfunction() {
+                $.ajax({
+                    type: "Get",
+                    url: "/ShoppingCart/_SepetYeri",
+                    success: function verigetir(veri) {
+
+                        $("#cart_box").html();
+                        $("#cart_box").html(veri);
+
+                    }
+                })
+
+            }
+        })
+    })
+</script>
+

@@ -1,0 +1,66 @@
+﻿
+@{
+    
+    ViewBag.Title = "RestaurantList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container margin_60_35">
+    <div class="row">
+
+        <div class="col-md-3">
+            <p>
+                <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">Restorantlar</a>
+            </p>
+           
+        </div><!--Sol Taraf -->
+        <div class="col-md-9">
+            <div id="tools">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                       
+                    </div>
+                    
+                </div>
+            </div><!--Üstteki Siralama Bölümleri -->
+
+            <div class="strip_list wow fadeIn" data-wow-delay="0.1s">
+                <div class="ribbon_1">
+                    Popular
+                </div>
+            @foreach (Restaurant item in ViewBag.resto)
+            {
+                <div class="row">
+                    <div class="col-md-9 col-sm-9">
+                        <div class="desc">
+                            <div class="thumb_strip">
+                                <a href="detail_page.html"><img src="@item.imagePath" alt=""></a>
+                            </div>
+                            @*<div class="rating">
+                                <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#0">98 reviews</a></small>)
+                            </div>*@
+                            <h3>@item.Name</h3>
+                            
+                            <div class="location">
+                             <span class="opening">Acilis Saati @item.Working_Hour.ToShortTimeString();-Kapaniş Saati:@item.End_Time.ToShortTimeString();         
+                              </span> Minimum Paket Tutari: @item.Packagefee TL
+                                <span class="opening">@item.Service_Time</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="go_to">
+                            <div>
+                                @*<a href="detail_page.html" class="btn_1">View Menu</a>*@
+                                @Html.ActionLink("Menu Goruntule","detailpage","Home",new {id=item.ID },new {@class= "btn_1" })
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End row--><br />
+            }
+            </div><!-- Restorant Listeleri-->
+        </div>
+    </div><!-- End row -->
+</div>
+

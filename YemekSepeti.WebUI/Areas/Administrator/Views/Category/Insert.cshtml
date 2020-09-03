@@ -1,0 +1,19 @@
+﻿@model Category
+@{
+    ViewBag.Title = "Kategori Ekle";
+}
+
+<h2>Kategori Ekle</h2>
+
+@using (Html.BeginForm("Insert", "Category", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="categoryName">Kategori Adı:</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="description">Açıklaması:</label>
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-default">Kaydet</button>
+}

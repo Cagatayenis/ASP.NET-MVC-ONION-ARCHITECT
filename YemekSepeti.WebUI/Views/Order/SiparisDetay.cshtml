@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "SiparisDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+    <div class="container margin_60_35">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="box_style_2">
+                    <h2 class="inner">Order confirmed!</h2>
+                    <div id="confirm">
+                        <i class="icon_check_alt2"></i>
+                        <h3>Tesekkur Ederiz!</h3>
+                        <p>
+                            Siparisiniz Tamamlanmiştir.
+                        </p>
+                    </div>
+                    <h4>Sipariş Detayları</h4>
+                    <table class="table table-striped nomargin">
+                        <tbody>
+
+                            @foreach (Sepet item in (List<Sepet>)Session["sepetim"])
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>@item.Quantity x</strong> @item.Name
+                                    </td>
+                                    <td>
+                                        <strong class="pull-right">@item.Price TL </strong>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td>                                  
+                                    Delivery schedule <a href="#" class="tooltip-1" data-placement="top" title="" data-original-title="Teslimat Süresi ortalama 30 dakikadir."><i class="icon_question_alt"></i></a>
+                                </td>                              
+                            </tr>
+                            <tr>
+                                <td class="total_confirm">
+                                    TOTAL
+                                </td>
+                                <td class="total_confirm">
+                                    <span class="pull-right">
+                                        @if (Session["sepetim"] != null)
+                                        {
+                                            decimal kdv = 1.18m;
+                                            List<Sepet>
+                                           spt = (List<Sepet>)Session["sepetim"];
+                                            @spt.Sum(x => x.Price * kdv)
+                                        }TL
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- End row -->
+    </div><!-- End container -->
+    <!-- End Content =============================================== -->
+
+
+

@@ -1,0 +1,26 @@
+﻿@model Category
+@{
+    ViewBag.Title = "Kategori Güncelle";
+}
+
+@using (Html.BeginForm("Update", "Category", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.ID)
+    @Html.HiddenFor(m => m.CreatedDate)
+    @Html.HiddenFor(m => m.CreatedIP)
+    @Html.HiddenFor(m => m.Status)
+    @Html.HiddenFor(m => m.ModifiedDate)
+    @Html.HiddenFor(m => m.ModifiedIP)
+
+    <div class="form-group">
+        <label for="categoryName">Kategori Adi:</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="description">Açıklaması:</label>
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-default">Güncelle</button>
+}
+
+
